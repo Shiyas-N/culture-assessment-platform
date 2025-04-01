@@ -1,0 +1,1 @@
+-- SQL file containing all CREATE TABLE statements (users, surveys, questions, etc.)

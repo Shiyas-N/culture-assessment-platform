@@ -1,0 +1,1 @@
+<!-- Authentication helpers (e.g., session handling) -->

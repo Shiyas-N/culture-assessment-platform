@@ -1,0 +1,1 @@
+<!-- Handles employee authentication & dashboard actions -->

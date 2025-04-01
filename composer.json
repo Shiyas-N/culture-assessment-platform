@@ -1,0 +1,15 @@
+{
+    "name": "user/culture-assessment-platform",
+    "autoload": {
+        "psr-4": {
+            "User\\CultureAssessmentPlatform\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shiyas-N",
+            "email": "muhammedshiyasn811@gmail.com"
+        }
+    ],
+    "require": {}
+}

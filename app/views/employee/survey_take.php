@@ -1,0 +1,1 @@
+<!-- Survey participation view -->

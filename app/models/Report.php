@@ -1,0 +1,1 @@
+<!-- Report model to store generated report data -->

@@ -1,0 +1,1 @@
+<!-- Handles admin authentication & dashboard actions -->

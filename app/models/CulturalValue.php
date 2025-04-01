@@ -1,0 +1,1 @@
+<!-- Predefined 10 culture values -->
