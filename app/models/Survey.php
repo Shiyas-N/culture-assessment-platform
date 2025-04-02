@@ -1,4 +1,5 @@
 <!-- Survey model (title, description, live status, etc.) -->
+<?php
 require_once '../helpers/database.php';
 
 class Survey {
@@ -20,3 +21,4 @@ class Survey {
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
+?>

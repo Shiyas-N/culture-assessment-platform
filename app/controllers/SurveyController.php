@@ -1,4 +1,5 @@
 <!-- CRUD for surveys, questions, rules, etc. -->
+<?php
 require_once '../models/Survey.php';
 
 class SurveyController {
@@ -24,3 +25,4 @@ class SurveyController {
         echo json_encode(["success" => true, "message" => "Survey published"]);
     }
 }
+?>
