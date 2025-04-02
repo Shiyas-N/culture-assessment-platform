@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const ruleId = this.getAttribute("data-id");
   
         fetch(`../../api/rule_api.php?id=${ruleId}`, { method: "DELETE" })
-          .then((response) => response.json())
-          .then((data) => {
+          .then((success) => {
             
-            if (data.success) {
+            if (success) {
               alert("Rule Deleted Successfully");
               location.reload();
             } else {

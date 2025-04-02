@@ -8,12 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
       fetch("../../api/rule_api.php", {
         method: "POST",
         body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
+      }).then((success) => {
+          if (success) {
             alert("Rule Created Successfully");
-            location.reload();
+            window.location.href = "survey_rules.php";
           } else {
             alert("Error Creating Rule");
           }
