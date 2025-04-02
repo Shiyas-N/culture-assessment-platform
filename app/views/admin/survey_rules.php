@@ -8,37 +8,54 @@ $ruleController = new RuleController($pdo);
 $rules = $ruleController->getAllRules();
 ?>
 
-<h2>Create Rule</h2>
-<form id="createRuleForm">
-    <label for="rule_name">Rule Name:</label>
-    <input type="text" name="rule_name" required>
-
-    <label for="rule_type">Rule Type:</label>
-    <select name="rule_type">
-        <option value="SINGLE">SINGLE</option>
-        <option value="COMBINATION">COMBINATION</option>
-    </select>
-
-    <button type="submit">Create Rule</button>
-</form>
-
-
-<h2>Existing Rules</h2>
-<table>
-    <tr>
-        <th>Rule Name</th>
-        <th>Rule Type</th>
-        <th>Actions</th>
-    </tr>
-    <?php foreach ($rules as $rule) { ?>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules List</title>
+    <link rel="stylesheet" href="../../../public/css/survey_rules.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Rules List</h2>
+        <table>
+            <tr>
+                <th>Rule ID</th>
+                <th>Rule Name</th>
+                <th>Rule Type</th>
+                <th>Actions</th>
+            </tr>
+             <?php foreach ($rules as $rule) { ?>
         <tr>
+            <td><?= $rule['id']; ?></td>
             <td><?= $rule['rule_name']; ?></td>
             <td><?= $rule['rule_type']; ?></td>
             <td>
-                <button class="deleteRule" data-id="<?= $rule['id']; ?>">Delete</button>
+            <div class="action-buttons">
+                    <button class="editRule primary" data-id="<?= $rule['id']; ?>">Edit</button>
+                    <button class="deleteRule primary" data-id="<?= $rule['id']; ?>">Delete</button>
+                </div>
             </td>
         </tr>
     <?php } ?>
-</table>
+        </table>
+        <button class="primary" onclick="location.href='create_rule.php'">Create Rule</button>
+    </div>
 
-<script src="../../../public/js/script.js"></script>
+
+    
+
+
+    
+
+
+
+
+</body>
+</html>
+
+
+
+
+<script src="../../../public/js/survey_rules.js"></script>
+

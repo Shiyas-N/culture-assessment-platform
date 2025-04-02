@@ -6,6 +6,8 @@ $ruleController = new RuleController($pdo);
 
 
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rule_name']) && isset($_POST['rule_type'])) {
     $result = $ruleController->createRule($_POST['rule_name'], $_POST['rule_type']);
     echo json_encode(['success' => $result]);
