@@ -2,9 +2,6 @@
 
 <?php
 
-require_once __DIR__ . '/../../db/db.php'; 
-
-
 class Rule {
 
     public static function getAllRules($db) {
@@ -25,8 +22,5 @@ class Rule {
     }
 
 }
-
-
-
 
 ?>

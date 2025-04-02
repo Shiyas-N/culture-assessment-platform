@@ -41,16 +41,6 @@ $rules = $ruleController->getAllRules();
         </table>
         <button class="primary" onclick="location.href='create_rule.php'">Create Rule</button>
     </div>
-
-
-    
-
-
-    
-
-
-
-
 </body>
 </html>
 

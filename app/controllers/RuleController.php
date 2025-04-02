@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../models/Rule.php';
 require_once __DIR__ . '/../models/RuleCondition.php';
-require_once __DIR__ . '/../../db/db.php';
 
 class RuleController {
     private $db;
