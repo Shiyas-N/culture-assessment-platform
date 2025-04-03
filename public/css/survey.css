@@ -1,0 +1,146 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Survey Container */
+.survey-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
+}
+
+/* Header */
+.survey-header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Table for details */
+.survey-details {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.survey-details tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.survey-details td {
+    padding: 5px;
+}
+
+.survey-details td:first-child {
+    font-weight: bold;
+    text-align: left;
+    width: 30%;
+}
+
+.survey-details td:nth-child(2) {
+    width: 50%;
+    text-align: left;
+}
+
+.survey-details td:last-child {
+    width: 20%;
+    text-align: right;
+}
+
+/* Edit Buttons */
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.add-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.add-btn:hover {
+    background-color: #218838;
+}
+
+.add-rule-btn {
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.add-rule-btn:hover {
+    background-color: #218838;
+}
+
+
+/* Bottom Buttons */
+.bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+.save-btn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.save-btn:hover {
+    background-color: #138496;
+}
