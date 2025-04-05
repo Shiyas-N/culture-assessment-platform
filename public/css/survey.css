@@ -1,32 +1,41 @@
-/* General styles */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 40px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    align-items: flex-start;
 }
 
-/* Survey Container */
+/* Wrapper Layout */
+.survey-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+}
+
+/* Left Panel - Survey Container */
 .survey-container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 450px;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 650px; /* fix the width */
 }
-
-/* Header */
+/* Survey Header */
 .survey-header {
     text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #333;
 }
 
-/* Table for details */
+/* Survey Details Table */
 .survey-details {
     width: 100%;
     border-collapse: collapse;
@@ -36,7 +45,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    margin-bottom: 12px;
 }
 
 .survey-details td {
@@ -44,14 +53,13 @@ body {
 }
 
 .survey-details td:first-child {
-    font-weight: bold;
-    text-align: left;
     width: 30%;
+    font-weight: 500;
+    color: #444;
 }
 
 .survey-details td:nth-child(2) {
     width: 50%;
-    text-align: left;
 }
 
 .survey-details td:last-child {
@@ -59,72 +67,63 @@ body {
     text-align: right;
 }
 
-/* Edit Buttons */
+/* Edit Button */
 .edit-btn {
-    background-color: #007bff;
-    color: white;
+    background-color: #0d6efd;
+    color: #fff;
     border: none;
-    padding: 6px 10px;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
+    transition: background-color 0.2s;
 }
 
 .edit-btn:hover {
-    background-color: #0056b3;
+    background-color: #0a58ca;
 }
 
 /* Action Buttons */
 .action-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
-.add-btn {
+.add-btn, .add-rule-btn {
     background-color: #28a745;
-    color: white;
+    color: #fff;
     border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
+    padding: 10px 18px;
     font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.add-btn:hover {
+.add-btn:hover, .add-rule-btn:hover {
     background-color: #218838;
 }
-
-.add-rule-btn {
-    background-color: #28a745; /* Green */
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.add-rule-btn:hover {
-    background-color: #218838;
-}
-
 
 /* Bottom Buttons */
 .bottom-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 30px;
+}
+
+.back-btn, .save-btn {
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.2s;
 }
 
 .back-btn {
     background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
 }
 
 .back-btn:hover {
@@ -133,14 +132,63 @@ body {
 
 .save-btn {
     background-color: #17a2b8;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
 }
 
 .save-btn:hover {
     background-color: #138496;
+}
+
+/* Right Panel - Questions List */
+.question-panel {
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 300px;
+}
+
+.question-panel h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #222;
+}
+
+.question-panel ul {
+    padding-left: 20px;
+    list-style: disc;
+    margin: 0;
+}
+
+.question-panel ul li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 8px;
+}
+.question-list {
+    list-style: none;
+    padding: 0;
+}
+
+.question-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.remove-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
 }
