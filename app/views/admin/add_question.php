@@ -1,75 +1,68 @@
 <?php
-require_once __DIR__ . '/../../controllers/SurveyQuestionController.php';
+require_once __DIR__ . '/../../../db/connection.php';
 
-$surveyId = $_GET['survey_id'] ?? null;
-$controller = new SurveyQuestionController();
-$surveyQuestions = $surveyId ? $controller->getSurveyQuestions($surveyId) : [];
+if (!$pdo) {
+    die("Database connection not established.");
+}
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add Questions to Survey</title>
-    <link rel="stylesheet" href="/culture-assessment-platform/public/css/questions.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Add Question</title>
+    <link rel="stylesheet" href="/../../../public/css/questions.css">
 </head>
 <body>
+
+<div class="container">
     <h2>Add Questions to Survey</h2>
 
-    <form method="POST" action="/api/survey_api.php">
-        <input type="hidden" name="survey_id" value="<?php echo htmlspecialchars($surveyId); ?>">
-
-        <!-- Dropdown for selecting questions -->
-        <div class="question-selector">
-            <select id="questionDropdown">
-                <option value="">Select a question</option>
-            </select>
-            <button type="button" id="addQuestion">+</button>
-        </div>
-
-        <!-- Selected questions will be displayed here -->
-        <div id="selectedQuestions">
-            <?php foreach ($surveyQuestions as $question): ?>
-                <div class="question-item">
-                    <input type="hidden" name="question_ids[]" value="<?php echo $question['id']; ?>">
-                    <span><?php echo htmlspecialchars($question['question_text']); ?></span>
-                    <button type="button" class="removeQuestion">X</button>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <button type="submit">Save Questions</button>
-    </form>
-
-    <script>
-    $(document).ready(function() {
-        function loadQuestions() {
-            $.ajax({
-                url: "/api/question_api.php",
-                type: "GET",
-                dataType: "json",
-                success: function(response) {
-                    let dropdown = $("#questionDropdown");
-                    dropdown.find("option:not(:first)").remove(); // Remove old options
-
-                    if (response.length === 0) {
-                        dropdown.append(`<option disabled>No questions available</option>`);
-                    } else {
-                        response.forEach(question => {
-                            dropdown.append(`<option value="${question.id}">${question.question_text}</option>`);
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error loading questions:", error);
+    <form action="insert_ques.php" method="post" onsubmit="prepareSubmit()">
+        <!-- Existing question dropdown -->
+        <label for="existing_qid">Select Existing Question:</label>
+        <div class="question-wrapper">
+            <select name="existing_qid" id="existing_qid">
+                <option value="">-- Select a question --</option>
+                <?php
+                $questions = [];
+                $stmt = $pdo->query("SELECT id, question_text FROM questions");
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $questions[$row['id']] = $row['question_text'];
+                    echo "<option value='{$row['id']}'>{$row['question_text']}</option>";
                 }
-            });
-        }
+                ?>
+            </select>
+            <button type="button" class="action-btn" onclick="addSelectedQuestion()">Add</button>
+        </div>
 
-        loadQuestions(); // Load questions on page load
-    });
+        <!-- New question input -->
+        <label for="new_question">Or Add New Question:</label>
+        <div class="new-question-wrapper">
+            <input type="text" id="new_question_input" placeholder="Type a new question...">
+            <button type="button" class="action-btn" onclick="addNewQuestion()">Create</button>
+        </div>
+
+        <!-- Display added questions -->
+        <div id="selected-display">
+            <strong>Added Questions:</strong>
+            <div id="question-list"><ul></ul></div>
+        </div>
+
+        <!-- Hidden field for submission -->
+        <input type="hidden" name="final_questions" id="final_questions">
+
+        <!-- Buttons -->
+        <div class="button-row">
+            <button type="submit" class="submit-btn" onclick="prepareSubmit()">Save</button>
+            <button type="button" class="back-button" onclick="window.history.back();">Go Back</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const questions = <?php echo json_encode($questions); ?>;
 </script>
+<script src="/../../../public/js/questions.js"></script>
 
-   
 </body>
 </html>
