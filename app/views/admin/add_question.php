@@ -14,10 +14,33 @@ if (!$pdo) {
 </head>
 <body>
 
+<?php 
+if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+    <script>
+        alert('✅ Questions linked to survey successfully!');
+        // Remove the "status" param from URL without refreshing
+        if (history.replaceState) {
+            const url = new URL(window.location);
+            url.searchParams.delete('status');
+            window.history.replaceState({}, document.title, url.pathname + url.search);
+        }
+    </script>
+<?php endif; ?>
+
+
+
 <div class="container">
     <h2>Add Questions to Survey</h2>
 
-    <form action="insert_ques.php" method="post" onsubmit="prepareSubmit()">
+    <form action="insert_ques.php" method="post" onsubmit="return prepareSubmit()">
+        <input type="hidden" name="survey_id" value="<?php echo htmlspecialchars($_GET['survey_id'] ?? ''); 
+        $survey_id = $_GET['survey_id'] ?? null;
+        if (!$survey_id) {
+            die("Missing survey ID.");
+        }
+        ?>">
+        
+
         <!-- Existing question dropdown -->
         <label for="existing_qid">Select Existing Question:</label>
         <div class="question-wrapper">
@@ -53,8 +76,8 @@ if (!$pdo) {
 
         <!-- Buttons -->
         <div class="button-row">
-            <button type="submit" class="submit-btn" onclick="prepareSubmit()">Save</button>
-            <button type="button" class="back-button" onclick="window.history.back();">Go Back</button>
+            <button type="submit" class="submit-btn">Save</button>
+            <button type="button" class="back-button" onclick="window.location.href= '/../../../app/views/admin/survey_details.php' ;">Go Back</button>
         </div>
     </form>
 </div>

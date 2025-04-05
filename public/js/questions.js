@@ -47,5 +47,13 @@
     function prepareSubmit() {
         const hiddenInput = document.getElementById('final_questions');
         const values = Array.from(addedQuestions.values());
+    
+        if (values.length === 0) {
+            alert("Please add at least one question.");
+            return false;
+        }
+    
         hiddenInput.value = JSON.stringify(values);
+        return true;
     }
+    
