@@ -10,6 +10,10 @@ class RuleController {
         $this->db = $db;
     }
 
+    public function getAllRules() {
+        return Rule::getAllRules($this->db);
+    }
+    
     public function createRule($rule_name, $rule_type) {
         return Rule::createRule($this->db, $rule_name, $rule_type);
     }
@@ -18,13 +22,24 @@ class RuleController {
         return Rule::deleteRule($this->db, $rule_id);
     }
 
+
+    public function getAllConditions(){
+        return RuleCondition::getAllConditions($this->db);
+    }
+
     public function addCondition($rule_id, $question_id, $answer_option_id, $logic_operator) {
         return RuleCondition::addCondition($this->db, $rule_id, $question_id, $answer_option_id, $logic_operator);
     }
 
-    public function getAllRules() {
-        return Rule::getAllRules($this->db);
+    public function deleteCondition($condition_id){
+        return RuleCondition::deleteCondition($this->db,$condition_id);
     }
+
+
+    public function getRuleConditions($rule_id){
+        return RuleCondition::getRuleConditions($this->db,$rule_id);
+    }
+
 }
 
 ?>

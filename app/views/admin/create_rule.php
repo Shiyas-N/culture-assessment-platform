@@ -9,6 +9,12 @@
         <option value="COMBINATION">COMBINATION</option>
     </select>
 
+    <h3>Conditions</h3>
+    <div id="conditionsContainer">
+        <!-- Conditions will be added here -->
+    </div>
+    <button type="button" id="addConditionBtn">Add Condition</button>
+
     <button type="submit">Create Rule</button>
 </form>
 

@@ -1,5 +1,3 @@
-<!-- Survey rules (AND logic combining questions) -->
-
 <?php
 
 class Rule {
@@ -12,7 +10,13 @@ class Rule {
     public static function createRule($db, $rule_name, $rule_type) {
         $query = "INSERT INTO rules (rule_name, rule_type) VALUES (:rule_name, :rule_type)";
         $stmt = $db->prepare($query);
-        return $stmt->execute(['rule_name' => $rule_name, 'rule_type' => $rule_type]);
+        $result = $stmt->execute(['rule_name' => $rule_name, 'rule_type' => $rule_type]);
+    
+        if ($result) {
+            return $db->lastInsertId();
+        }
+        
+        return false;
     }
 
     public static function deleteRule($db, $rule_id) {
