@@ -21,4 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
 
+  document.querySelectorAll(".editRule").forEach((button) => {
+    button.addEventListener("click", function () {
+      const ruleId = this.getAttribute("data-id");
+     
+      window.location.href = `rule_edit.php?id=${ruleId}`;
+    });
+  });
   
