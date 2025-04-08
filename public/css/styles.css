@@ -1,37 +1,180 @@
-/* Main stylesheet (global and module-specific styles) */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
+    background-color: #f8f9fa;
+    margin: 20px;
 }
 
-.dashboard {
-    width: 80%;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
+.dashboard-container {
+    width: 90%;
+    margin: 0 auto;
 }
 
-.create-btn {
-    background: green;
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-survey-btn {
+    background-color: #4CAF50;
     color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.create-survey-btn:hover {
+    background-color: #388e3c;
+}
+
+.plus-icon {
+    font-size: 20px;
 }
 
 table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
+table th, table td {
+    padding: 12px 16px;
     text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+table th {
+    background-color: #f1f1f1;
+}
+.survey-link {
+    color: #1e90ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.survey-link:hover {
+    text-decoration: underline;
+}
+.publish-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.publish-btn:hover {
+    background-color: #218838;
+}
+
+.survey-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.survey-link:hover {
+    text-decoration: underline;
+}
+.publish-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.publish-btn.publish {
+    background-color: #28a745; /* Green */
+}
+
+.publish-btn.unpublish {
+    background-color: #dc3545; /* Red */
+}
+.back-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    transition: background-color 0.2s ease;
+}
+.back-btn:hover {
+    background-color: #0056b3;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7f9;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 30px;
+}
+
+form#survey-form {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form#survey-form input[type="text"],
+form#survey-form input[type="date"],
+form#survey-form textarea,
+form#survey-form select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+form#survey-form input:focus,
+form#survey-form textarea:focus,
+form#survey-form select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+form#survey-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+form#survey-form button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form#survey-form button:hover {
+    background: #0056b3;
 }

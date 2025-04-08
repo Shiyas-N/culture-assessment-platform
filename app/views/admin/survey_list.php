@@ -1,4 +1,5 @@
 <!-- List & manage surveys -->
+<<<<<<< HEAD
 <?php
 require_once '../../models/Survey.php';
 $surveys = Survey::getAllSurveys();
@@ -49,3 +50,23 @@ $surveys = Survey::getAllSurveys();
     <script src="../../public/js/script.js"></script>
 </body>
 </html>
+=======
+<?php include '../partials/header.php'; ?>
+<h2>Manage Surveys</h2>
+<div id="survey-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Issue</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="survey-table-body"></tbody>
+    </table>
+</div>
+<script src="/public/js/survey.js"></script>
+<?php include '../partials/footer.php'; ?>
+>>>>>>> f8e00d9 (Implemented admin dashboard and survey management)
