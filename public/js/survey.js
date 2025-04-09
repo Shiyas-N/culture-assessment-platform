@@ -1,43 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
-    loadSurveys();
+  const form = document.getElementById("survey-form");
 
-    document.getElementById("survey-form")?.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(this);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        fetch("/api/survey_api.php?action=create", {
-            method: "POST",
-            body: formData,
-        }).then(response => response.json()).then(data => {
-            alert(data.message);
-            if (data.success) location.href = "survey_list.php";
-        });
-    });
+    const title = document.getElementById("title").value;
+    const issue = document.getElementById("issue").value;
+    const deadline = document.getElementById("deadline").value;
+    const description = document.getElementById("description").value;
+    const experience = document.getElementById("experience").value;
+
+    fetch("../../api/survey_api.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "create",
+        title,
+        issue,
+        deadline,
+        description,
+        experience,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          form.reset();
+          window.location.href = "dashboard.php";
+        } else {
+          alert("Failed to create survey: " + data.message);
+        }
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        alert("An error occurred while creating the survey.");
+      });
+  });
 });
-
-function loadSurveys() {
-    fetch("/api/survey_api.php?action=fetch")
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.getElementById("survey-list");
-            tbody.innerHTML = data.map(survey => `
-                <tr>
-                    <td>${survey.id}</td>
-                    <td>${survey.title}</td>
-                    <td>${survey.issue}</td>
-                    <td>${survey.deadline}</td>
-                    <td>${survey.members_polled}</td>
-                    <td><button onclick="publishSurvey(${survey.id})">Publish</button></td>
-                </tr>
-            `).join("");
-        });
-}
-
-function publishSurvey(surveyId) {
-    fetch(`/api/survey_api.php?action=publish&id=${surveyId}`)
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            loadSurveys();
-        });
-}

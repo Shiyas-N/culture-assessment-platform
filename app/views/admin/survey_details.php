@@ -1,13 +1,16 @@
-<head><link rel="stylesheet" href="/../public/css/styles.css"></head>
+<head>
+    <link rel="stylesheet" href="/../public/css/styles.css">
+</head>
 <?php
 require_once __DIR__ . '/../../models/Survey.php';
+require_once __DIR__ . '/../../../db/connect.php';
 
 if (!isset($_GET['id'])) {
     echo "No survey ID provided.";
     exit;
 }
 
-$survey = Survey::getById($_GET['id']);
+$survey = Survey::getSurveyById($pdo, $_GET['id']);
 if (!$survey) {
     echo "Survey not found.";
     exit;
@@ -16,12 +19,12 @@ if (!$survey) {
 
 <h2>Survey Details</h2>
 
-<p><strong>ID:</strong> <?php echo $survey['id']; ?></p>
-<p><strong>Title:</strong> <?php echo $survey['title']; ?></p>
-<p><strong>Description:</strong> <?php echo $survey['description']; ?></p>
-<p><strong>Issue Date:</strong> <?php echo $survey['issue']; ?></p>
-<p><strong>Deadline:</strong> <?php echo $survey['deadline']; ?></p>
-<p><strong>Job Role:</strong> <?php echo $survey['job_role']; ?></p>
+<p><strong>ID:</strong> <?= $survey['id'] ?></p>
+<p><strong>Title:</strong> <?= $survey['title'] ?></p>
+<p><strong>Description:</strong> <?= $survey['description'] ?></p>
+<p><strong>Issue Date:</strong> <?= $survey['issue'] ?></p>
+<p><strong>Deadline:</strong> <?= $survey['deadline'] ?></p>
+<p><strong>Experience:</strong> <?= $survey['experience'] ?></p>
 
-<a href="survey_edit.php?id=<?php echo $survey['id']; ?>" class="back-btn">Edit Survey</a> <br>
-<a href="dashboard.php" class="back-btn"> Back to Dashboard</a>
+<a href="survey_edit.php?id=<?= $survey['id'] ?>" class="back-btn">Edit Survey</a> <br>
+<a href="dashboard.php" class="back-btn">Back to Dashboard</a>

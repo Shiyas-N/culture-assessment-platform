@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../../models/Survey.php';
-$surveys = Survey::getAllSurveys();
+require_once __DIR__ . '/../../../db/connect.php';
+$surveys = Survey::getAllSurveys($pdo); 
 ?>
 
-<!-- Link to styles -->
 <link rel="stylesheet" href="/../public/css/styles.css">
 
 <div class="dashboard-container">
@@ -30,26 +30,26 @@ $surveys = Survey::getAllSurveys();
             <?php foreach ($surveys as $survey) : ?>
                 <tr>
                     <td>
-                        <a href="survey_details.php?id=<?php echo $survey['id']; ?>" class="survey-link">
-                            <?php echo $survey['id']; ?>
+                        <a href="survey_details.php?id=<?= $survey['id'] ?>" class="survey-link">
+                            <?= $survey['id'] ?>
                         </a>
                     </td>
-                    <td><?php echo $survey['title']; ?></td>
-                    <td><?php echo $survey['description']; ?></td>
-                    <td><?php echo $survey['issue']; ?></td>
-                    <td><?php echo $survey['deadline']; ?></td>
-                    <td><?php echo $survey['experience']; ?></td>
+                    <td><?= $survey['title'] ?></td>
+                    <td><?= $survey['description'] ?></td>
+                    <td><?= $survey['issue'] ?></td>
+                    <td><?= $survey['deadline'] ?></td>
+                    <td><?= $survey['experience'] ?></td>
                     <td>
-                    <?php
+                        <?php
                         $isLive = $survey['is_live'];
                         $buttonText = $isLive ? 'Unpublish' : 'Publish';
                         $buttonClass = $isLive ? 'Unpublish' : 'Publish';
                         ?>
                         <button
-                            class="publish-btn <?php echo $buttonClass; ?>"
-                            data-id="<?php echo $survey['id']; ?>"
-                            data-status="<?php echo $isLive; ?>">
-                            <?php echo $buttonText; ?>
+                            class="publish-btn <?= $buttonClass ?>"
+                            data-id="<?= $survey['id'] ?>"
+                            data-status="<?= $isLive ?>">
+                            <?= $buttonText ?>
                         </button>
                     </td>
                 </tr>
@@ -58,32 +58,4 @@ $surveys = Survey::getAllSurveys();
     </table>
 </div>
 
-<!-- JS to handle publish -->
-<script>
-document.querySelectorAll('.publish-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        const surveyId = this.getAttribute('data-id');
-        const isLive = this.getAttribute('data-status') === '1';
-        const newAction = isLive ? 'Unpublish' : 'Publish';
-
-        fetch(`../../controllers/SurveyController.php?action=${newAction}&id=${surveyId}`)
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-
-                // Update button status
-                const newStatus = isLive ? '0' : '1';
-                this.setAttribute('data-status', newStatus);
-                this.textContent = isLive ? 'Publish' : 'Unpublish';
-
-                // Update button class
-                this.classList.remove(isLive ? 'Unpublish' : 'Publish');
-                this.classList.add(isLive ? 'Publish' : 'Unpublish');
-            })
-            .catch(err => {
-                console.error("Error toggling publish:", err);
-                alert("Failed to update status.");
-            });
-    });
-});
-</script>
+<script src="../../../public/js/toggle_publish.js"></script>

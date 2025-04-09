@@ -1,39 +1,60 @@
-<head><link rel="stylesheet" href="/../public/css/styles.css"></head>
 <?php
-require_once __DIR__ . '/../../db/connect.php';
 
 class Survey {
-    public static function getAllSurveys() {
-        $pdo = Database::connect();
-        $stmt = $pdo->query("SELECT id, title, description, issue, deadline, is_live, experience FROM surveys ORDER BY id DESC");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public static function getAllSurveys($db) {
+        $query = 'SELECT * FROM surveys ORDER BY id DESC';
+        return $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function createSurvey($title, $description, $issue, $deadline, $experience) {
-        require_once '../../db/connection.php';
-        $pdo = Database::connect();
-        $stmt = $pdo->prepare("INSERT INTO surveys (title, description, issue, deadline, experience) VALUES (?, ?, ?, ?, ?)");
-        return $stmt->execute([$title, $description, $issue, $deadline, $experience]);
+    public static function createSurvey($db, $title, $description, $issue, $deadline, $experience) {
+        $query = 'INSERT INTO surveys (title, description, issue, deadline, experience) VALUES (:title, :description, :issueDate, :deadline, :exp)';
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute([
+            'title' => $title,
+            'description' => $description,
+            'issueDate' => $issue,
+            'deadline' => $deadline,
+            'exp' => $experience,
+        ]);
+
+        if ($result) {
+            return $db->lastInsertId();
+        }
+
+        return false;
     }
 
-    public static function getById($id) {
-        $db = Database::connect();
-        $stmt = $db->prepare("SELECT * FROM surveys WHERE id = ?");
-        $stmt->execute([$id]);
+    public static function getSurveyById($db, $id) {
+        $query = 'SELECT * FROM surveys WHERE id = :id';
+        $stmt = $db->prepare($query);
+        $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function updateSurvey($id, $title, $description, $issue, $deadline, $experience) {
-        $db = Database::getInstance();
-        $stmt = $db->prepare("UPDATE surveys SET title = ?, description = ?, issue = ?, deadline = ?, experience = ? WHERE id = ?");
-        return $stmt->execute([$title, $description, $issue, $deadline, $experience, $id]);
+    public static function updateSurvey($db, $id, $title, $description, $issue, $deadline, $experience) {
+        $query = 'UPDATE surveys SET title = :title, description = :description, issue = :issueDate, deadline = :deadline, experience = :exp WHERE id = :id';
+        $stmt = $db->prepare($query);
+        return $stmt->execute([
+            'title' => $title,
+            'description' => $description,
+            'issueDate' => $issue,
+            'deadline' => $deadline,
+            'exp' => $experience,
+            'id' => $id,
+        ]);
     }
 
-    public static function toggleSurveyStatus($id, $status) {
-        $db = Database::getInstance();
-        $stmt = $db->prepare("UPDATE surveys SET is_live = ? WHERE id = ?");
-        $stmt->execute([$status, $id]);
+    public static function toggleSurveyStatus($db, $id) {
+        $query = 'UPDATE surveys SET is_live = NOT is_live WHERE id = :id';
+        $stmt = $db->prepare($query);
+        $stmt->execute(['id' => $id]);
         return $stmt->rowCount();
+    }
+
+    public static function deleteSurvey($db, $id) {
+        $query = 'DELETE FROM surveys WHERE id = :id';
+        $stmt = $db->prepare($query);
+        return $stmt->execute(['id' => $id]);
     }
 }
 ?>

@@ -1,14 +1,14 @@
 <?php include '../partials/header.php'; ?>
 
 <!-- Link to custom styles -->
-<head>
+<!-- <head>
     <link rel="stylesheet" href="/testt/public/css/styles.css">
-</head>
+</head> -->
 
 <div class="form-container">
     <h2>Create Survey</h2>
 
-    <form id="survey-form" action="../../controllers/SurveyController.php" method="POST">
+    <form id="survey-form">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Survey title" required>
@@ -42,11 +42,11 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" name="create_survey" class="btn-submit">Create Survey</button>
+            <button type="submit" class="btn-submit">Create Survey</button>
         </div>
     </form>
 </div>
 
-<script src="/public/js/survey.js"></script>
+<script src="../../../public/js/survey.js"></script>
 
 <?php include '../partials/footer.php'; ?>
