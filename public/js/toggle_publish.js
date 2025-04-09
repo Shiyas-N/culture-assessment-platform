@@ -51,16 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.success) {
-            alert("✅ Survey deleted successfully.");
-            location.reload();
-          } else {
-            alert("❌ Failed to delete survey.");
+           if(!data.success){
+            alert(" Failed to delete survey.");
             console.error(data.error || "Unknown error");
           }
         })
         .catch((error) => {
-          alert("❌ Error deleting survey.");
+          alert(" Error deleting survey.");
           console.error(error);
         });
     });
