@@ -1,52 +1,66 @@
 <?php include '../partials/header.php'; ?>
 
-<!-- Link to custom styles -->
-<!-- <head>
-    <link rel="stylesheet" href="/testt/public/css/styles.css">
-</head> -->
 
-<div class="form-container">
-    <h2>Create Survey</h2>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create survey</title>
+    <link rel="stylesheet" href="../../../public/css/survey_create.css">
+    
+</head>
 
-    <form id="survey-form">
-        <div class="form-group">
+<body>
+    <div class="container">
+        <h2>CREATE SURVEY</h2>
+        <form id = "survey-form">
+            
+
             <label for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Survey title" required>
-        </div>
 
-        <div class="form-group">
             <label for="issue">Issue Date</label>
-            <input type="date" name="issue" id="issue" required>
-        </div>
+            <input type="date" id="issue" name="issue" required>
 
-        <div class="form-group">
             <label for="deadline">Deadline</label>
-            <input type="date" name="deadline" id="deadline" required>
-        </div>
+            <input type="date" id="deadline" name="deadline" required>
 
-        <div class="form-group">
             <label for="description">Description</label>
-            <textarea name="description" id="description" placeholder="Survey description"></textarea>
-        </div>
+            <textarea id="description" name="description" placeholder="Survey description"></textarea>
 
-        <div class="form-group">
-            <label for="experience">Experience</label>
-            <select name="experience" id="experience" required>
-                <option value="">-- Select Experience --</option>
-                <option value="0-1">0-1 years</option>
-                <option value="0-2">0-2 years</option>
-                <option value="0-3">0-3 years</option>
-                <option value="1-3">1-3 years</option>
-                <option value="3+">3+ years</option>
-            </select>
-        </div>
+            <div class="flex">
+                <div>
+                    <label for="experience">Experience</label>
+                    <select id="experience" name="experience" required>
+                        <option value="">Select range</option>
+                        <option value="0-2">0–2 Years</option>
+                        <option value="2-5">2–5 Years</option>
+                        <option value="5+">5+ Years</option>
+                    </select>
+                </div>
+               
+            </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn-submit">Create Survey</button>
-        </div>
-    </form>
-</div>
+            <div class="button-group">
+                <button type="submit" class="create-btn">Create survey</button>
+               
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+
+ 
+
+
+
+
 
 <script src="../../../public/js/survey.js"></script>
 
 <?php include '../partials/footer.php'; ?>
+
+
+
+

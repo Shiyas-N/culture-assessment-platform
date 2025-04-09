@@ -1,4 +1,6 @@
 <?php
+
+
 require_once __DIR__ . '/../../../db/connect.php';
 
 if (!$pdo) {
@@ -48,7 +50,12 @@ if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
                 <option value="">-- Select a question --</option>
                 <?php
                 $questions = [];
-                $stmt = $pdo->query("SELECT id, question_text FROM questions");
+               try {
+    $stmt = $pdo->query("SELECT id, question_text FROM questions");
+} catch (PDOException $e) {
+    die("Database error: " . $e->getMessage());
+}
+
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $questions[$row['id']] = $row['question_text'];
                     echo "<option value='{$row['id']}'>{$row['question_text']}</option>";

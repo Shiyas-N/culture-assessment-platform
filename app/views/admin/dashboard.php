@@ -5,6 +5,7 @@ $surveys = Survey::getAllSurveys($pdo);
 ?>
 
 <link rel="stylesheet" href="/../public/css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <div class="dashboard-container">
     <div class="dashboard-header">
@@ -40,18 +41,25 @@ $surveys = Survey::getAllSurveys($pdo);
                     <td><?= $survey['deadline'] ?></td>
                     <td><?= $survey['experience'] ?></td>
                     <td>
-                        <?php
-                        $isLive = $survey['is_live'];
-                        $buttonText = $isLive ? 'Unpublish' : 'Publish';
-                        $buttonClass = $isLive ? 'Unpublish' : 'Publish';
-                        ?>
-                        <button
-                            class="publish-btn <?= $buttonClass ?>"
-                            data-id="<?= $survey['id'] ?>"
-                            data-status="<?= $isLive ?>">
-                            <?= $buttonText ?>
-                        </button>
-                    </td>
+    <div class="action-buttons">
+        <?php
+        $isLive = $survey['is_live'];
+        $buttonText = $isLive ? 'Unpublish' : 'Publish';
+        $buttonClass = $isLive ? 'unpublish' : 'publish';
+        ?>
+        <button
+            class="publish-btn <?= $buttonClass ?>"
+            data-id="<?= $survey['id'] ?>"
+            data-status="<?= $isLive ?>">
+            <?= $buttonText ?>
+        </button>
+
+        <button class="publish-btn delete" data-id="<?= $survey['id'] ?>">
+            <i class="fas fa-trash-alt"></i> Delete
+        </button>
+    </div>
+</td>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>

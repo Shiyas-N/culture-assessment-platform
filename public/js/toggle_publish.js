@@ -35,3 +35,34 @@ document.querySelectorAll(".publish-btn").forEach((button) => {
       });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteButtons = document.querySelectorAll(".delete");
+
+  deleteButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const surveyId = btn.getAttribute("data-id");
+
+      const confirmDelete = confirm("Are you sure you want to delete this survey?");
+      if (!confirmDelete) return;
+
+      fetch(`../../api/survey_api.php?id=${surveyId}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("✅ Survey deleted successfully.");
+            location.reload();
+          } else {
+            alert("❌ Failed to delete survey.");
+            console.error(data.error || "Unknown error");
+          }
+        })
+        .catch((error) => {
+          alert("❌ Error deleting survey.");
+          console.error(error);
+        });
+    });
+  });
+});

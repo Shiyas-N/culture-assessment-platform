@@ -1,0 +1,116 @@
+body {
+  background-color: #f5f3ff;
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  background-color: #fff;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(140, 82, 255, 0.2);
+  border: 2px solid #c7bfff;
+}
+
+h2 {
+  text-align: center;
+  color: #6c3fc9;
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #faf8ff;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.flex {
+  display: flex;
+  gap: 15px;
+}
+
+.flex > div {
+  flex: 1;
+}
+
+.button-group {
+  text-align: center;
+  margin-top: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.create-btn {
+  background-color: #6c3fc9;
+  color: white;
+}
+
+.create-btn:hover {
+  background-color: rgb(84, 44, 169);
+}
+
+.reset-btn {
+  background-color: #c29bf1;
+  color: #311e1e;
+}
+
+.reset-btn:hover {
+  background-color: #ddd;
+}
+
+.rules-btn {
+  background-color: #d1c4ff;
+  color: #4a148c;
+}
+
+.add-question-btn {
+  background-color: #f0d9ff;
+  color: #6a1b9a;
+}
+
+.add-question-btn:hover {
+  background-color: #e1bee7;
+}
+
+.rules-btn {
+  background-color: #d1c4ff;
+  color: #4a148c;
+}
+
+.rules-btn:hover {
+  background-color: #b39ddb;
+}
+
+.rules-btn:hover {
+  background-color: #b39ddb;
+}
