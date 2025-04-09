@@ -1,13 +1,61 @@
-<!-- Admin dashboard view -->
+<?php
+require_once __DIR__ . '/../../models/Survey.php';
+require_once __DIR__ . '/../../../db/connect.php';
+$surveys = Survey::getAllSurveys($pdo); 
+?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    test page
-</body>
-</html>
+<link rel="stylesheet" href="/../public/css/styles.css">
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>Survey List</h2>
+        <a href="survey_create.php" class="create-survey-btn">
+            <span class="plus-icon">&#43;</span>Create Survey
+        </a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Issue Date</th>
+                <th>Deadline</th>
+                <th>Experience</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($surveys as $survey) : ?>
+                <tr>
+                    <td>
+                        <a href="survey_details.php?id=<?= $survey['id'] ?>" class="survey-link">
+                            <?= $survey['id'] ?>
+                        </a>
+                    </td>
+                    <td><?= $survey['title'] ?></td>
+                    <td><?= $survey['description'] ?></td>
+                    <td><?= $survey['issue'] ?></td>
+                    <td><?= $survey['deadline'] ?></td>
+                    <td><?= $survey['experience'] ?></td>
+                    <td>
+                        <?php
+                        $isLive = $survey['is_live'];
+                        $buttonText = $isLive ? 'Unpublish' : 'Publish';
+                        $buttonClass = $isLive ? 'Unpublish' : 'Publish';
+                        ?>
+                        <button
+                            class="publish-btn <?= $buttonClass ?>"
+                            data-id="<?= $survey['id'] ?>"
+                            data-status="<?= $isLive ?>">
+                            <?= $buttonText ?>
+                        </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<script src="../../../public/js/toggle_publish.js"></script>
