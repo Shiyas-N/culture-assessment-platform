@@ -1,3 +1,10 @@
+function getSurveyIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("survey_id");
+}
+
+const surveyId = getSurveyIdFromURL();
+
 document.addEventListener("DOMContentLoaded", function () {
   const conditionsContainer = document.getElementById("conditionsContainer");
   const addConditionBtn = document.getElementById("addConditionBtn");
@@ -91,7 +98,11 @@ document.addEventListener("DOMContentLoaded", function () {
       fetch("../../api/rule_api.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rule_name: ruleName, rule_type: ruleType }),
+        body: JSON.stringify({
+          rule_name: ruleName,
+          rule_type: ruleType,
+          survey_id: surveyId,
+        }),
       })
         .then((res) => res.json())
         .then((data) => {
@@ -135,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   );
                 } else {
                   alert("Rule Created Successfully");
-                  window.location.href = "survey_rules.php";
+                  window.location.href = `survey_rules.php?survey_id=${surveyId}`;
                 }
               })
               .catch((err) => {

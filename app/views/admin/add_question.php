@@ -1,98 +1,58 @@
 <?php
-
+$surveyId = $_GET['survey_id'] ?? null;
 
 require_once __DIR__ . '/../../../db/connect.php';
+require_once __DIR__ . '/../../controllers/QuestionController.php';
 
-if (!$pdo) {
-    die("Database connection not established.");
-}
+$questionController = new QuestionController($pdo);
+$questions = $questionController->getAllQuestions();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Add Question</title>
-    <link rel="stylesheet" href="/../../../public/css/questions.css">
+  <meta charset="UTF-8">
+  <title>Add Questions to Survey</title>
+  <link rel="stylesheet" href="../../../public/css/survey_rules.css">
 </head>
 <body>
+  <div class="container">
+    <h2>Select or Add Questions</h2>
 
-<?php 
-if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
-    <script>
-        alert('✅ Questions linked to survey successfully!');
-        // Remove the "status" param from URL without refreshing
-        if (history.replaceState) {
-            const url = new URL(window.location);
-            url.searchParams.delete('status');
-            window.history.replaceState({}, document.title, url.pathname + url.search);
-        }
-    </script>
-<?php endif; ?>
+    <form id="surveyQuestionForm">
+      <input type="hidden" name="survey_id" value="<?= $surveyId ?>">
 
+      <div class="form-group">
+        <label for="existingQuestions">Choose Existing Questions:</label>
+        <select id="existingQuestions" multiple>
+          <?php foreach ($questions as $q): ?>
+            <option value="<?= htmlspecialchars($q['id']) ?>">
+              <?= htmlspecialchars($q['text']) ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
 
+      <hr>
 
-<div class="container">
-    <h2>Add Questions to Survey</h2>
+      <div class="form-group">
+        <label for="customQuestion">Add Custom Question:</label>
+        <input type="text" id="customQuestion" placeholder="Type your question">
+        <button type="button" id="addCustomQuestion" class="primary">Add</button>
+      </div>
 
-    <form action="insert_ques.php" method="post" onsubmit="return prepareSubmit()">
-        <input type="hidden" name="survey_id" value="<?php echo htmlspecialchars($_GET['survey_id'] ?? ''); 
-        $survey_id = $_GET['survey_id'] ?? null;
-        if (!$survey_id) {
-            die("Missing survey ID.");
-        }
-        ?>">
-        
+      <ul id="customQuestionsList"></ul>
+      <hr>
 
-        <!-- Existing question dropdown -->
-        <label for="existing_qid">Select Existing Question:</label>
-        <div class="question-wrapper">
-            <select name="existing_qid" id="existing_qid">
-                <option value="">-- Select a question --</option>
-                <?php
-                $questions = [];
-               try {
-    $stmt = $pdo->query("SELECT id, question_text FROM questions");
-} catch (PDOException $e) {
-    die("Database error: " . $e->getMessage());
-}
+    <div class="form-group">
+        <h4>Selected Questions</h4>
+        <ul id="selectedQuestionsList"></ul>
+    </div>
 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $questions[$row['id']] = $row['question_text'];
-                    echo "<option value='{$row['id']}'>{$row['question_text']}</option>";
-                }
-                ?>
-            </select>
-            <button type="button" class="action-btn" onclick="addSelectedQuestion()">Add</button>
-        </div>
-
-        <!-- New question input -->
-        <label for="new_question">Or Add New Question:</label>
-        <div class="new-question-wrapper">
-            <input type="text" id="new_question_input" placeholder="Type a new question...">
-            <button type="button" class="action-btn" onclick="addNewQuestion()">Create</button>
-        </div>
-
-        <!-- Display added questions -->
-        <div id="selected-display">
-            <strong>Added Questions:</strong>
-            <div id="question-list"><ul></ul></div>
-        </div>
-
-        <!-- Hidden field for submission -->
-        <input type="hidden" name="final_questions" id="final_questions">
-
-        <!-- Buttons -->
-        <div class="button-row">
-            <button type="submit" class="submit-btn">Save</button>
-            <button type="button" class="back-button" onclick="window.location.href= '/../../../app/views/admin/survey_details.php' ;">Go Back</button>
-        </div>
+      <button type="submit" class="primary">Save Questions</button>
     </form>
-</div>
+  </div>
 
-<script>
-    const questions = <?php echo json_encode($questions); ?>;
-</script>
-<script src="/../../../public/js/questions.js"></script>
-
+  <script src="../../../public/js/survey_question_handler.js"></script>
 </body>
 </html>

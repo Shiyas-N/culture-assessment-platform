@@ -28,7 +28,6 @@
       <div class="form-section">
         <h3>Conditions</h3>
         <div id="conditionsContainer">
-          <!-- Conditions inserted by JS -->
         </div>
         <button type="button" id="addConditionBtn" class="primary">Add Condition</button>
       </div>

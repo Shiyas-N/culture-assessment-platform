@@ -10,7 +10,7 @@ class QuestionController {
         $this->db = $db;
     }
 
-    public function getAllQuestion(){
+    public function getAllQuestions(){
         return Questions::getAllQuestions($this->db);
     }
 

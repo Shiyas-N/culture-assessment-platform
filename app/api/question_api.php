@@ -10,7 +10,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        $questions = $questionController->getAllQuestion();
+        $questions = $questionController->getAllQuestions();
         echo json_encode($questions);
         break;
 

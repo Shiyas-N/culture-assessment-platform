@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          alert(data.message);
+          alert(data.survey_id);
           form.reset();
-          window.location.href = "dashboard.php";
+          window.location.href = `add_question.php?survey_id=${data.survey_id}`;
         } else {
-          alert("Failed to create survey: " + data.message);
+          alert("Failed to create survey: " + data.error);
         }
       })
       .catch((err) => {
@@ -40,4 +40,3 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
-

@@ -1,12 +1,20 @@
--- CREATE TABLE surveys (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     title VARCHAR(255) NOT NULL,
---     effective_from DATE NOT NULL,
---     deadline DATE NOT NULL,
---     experience ENUM('0-2', '2-5', '5+') NOT NULL
--- );
+
+CREATE TABLE surveys (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  issue DATE NOT NULL,
+  deadline DATE NOT NULL,
+  description TEXT DEFAULT NULL,
+  members_polled INT(11) NOT NULL DEFAULT 0,
+  status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+  experience VARCHAR(11) DEFAULT NULL,
+  is_live TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+);
+
+
 CREATE TABLE survey_questions (
-    survey_id INT NOT NULL,
+    survey_id INT(11) NOT NULL,
     question_id INT UNSIGNED NOT NULL,
     PRIMARY KEY (survey_id, question_id),
     FOREIGN KEY (survey_id) REFERENCES surveys(id) ON DELETE CASCADE,
@@ -17,8 +25,10 @@ CREATE TABLE survey_questions (
 
 CREATE TABLE rules (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    survey_id INT(11) NOT NULL,
     rule_name VARCHAR(255) NOT NULL,
-    rule_type ENUM('SINGLE', 'COMBINATION') NOT NULL
+    rule_type ENUM('SINGLE', 'COMBINATION') NOT NULL,
+    FOREIGN KEY (survey_id) REFERENCES surveys(id) ON DELETE CASCADE
 );
 
 CREATE TABLE questions ( 
@@ -56,16 +66,3 @@ CREATE TABLE rule_cultural_values (
     FOREIGN KEY (cultural_value_id) REFERENCES cultural_values(id) ON DELETE CASCADE 
 );
 
--- SQL file containing all CREATE TABLE statements (users, surveys, questions, etc.)
-CREATE TABLE surveys (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  title VARCHAR(255) NOT NULL,
-  issue DATE NOT NULL,
-  deadline DATE NOT NULL,
-  description TEXT DEFAULT NULL,
-  members_polled INT(11) NOT NULL DEFAULT 0,
-  status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
-  experience VARCHAR(11) DEFAULT NULL,
-  is_live TINYINT(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-);

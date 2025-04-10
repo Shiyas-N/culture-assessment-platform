@@ -14,10 +14,14 @@ class RuleController {
         return Rule::getAllRules($this->db);
     }
     
-    public function createRule($rule_name, $rule_type) {
-        return Rule::createRule($this->db, $rule_name, $rule_type);
+    public function getRulesBySurvey($survey_id) {
+        return Rule::getRulesBySurvey($this->db, $survey_id);
     }
-
+    
+    public function createRule($survey_id, $rule_name, $rule_type) {
+        return Rule::createRule($this->db, $survey_id, $rule_name, $rule_type);
+    }
+    
     public function deleteRule($rule_id) {
         return Rule::deleteRule($this->db, $rule_id);
     }

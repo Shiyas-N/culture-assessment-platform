@@ -1,11 +1,18 @@
 <?php
 
+$survey_id = $_GET['survey_id'] ?? null;
+
 require_once __DIR__ . '/../../../db/connect.php';
 require_once __DIR__ . '/../../controllers/RuleController.php';
 
 
 $ruleController = new RuleController($pdo);
-$rules = $ruleController->getAllRules();
+if ($survey_id) {
+    $rules = $ruleController->getRulesBySurvey($survey_id);
+} else {
+    $rules = [];
+}
+
 ?>
 
 <html lang="en">
@@ -39,7 +46,8 @@ $rules = $ruleController->getAllRules();
         </tr>
     <?php } ?>
         </table>
-        <button class="primary" onclick="location.href='create_rule.php'">Create Rule</button>
+        <button class="primary" onclick="location.href='create_rule.php?survey_id=<?= $survey_id ?>'">Create Rule</button>
+
     </div>
 </body>
 </html>

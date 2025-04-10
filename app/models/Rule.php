@@ -7,10 +7,23 @@ class Rule {
         return $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function createRule($db, $rule_name, $rule_type) {
-        $query = "INSERT INTO rules (rule_name, rule_type) VALUES (:rule_name, :rule_type)";
+
+    public static function getRulesBySurvey($db, $survey_id) {
+        $query = "SELECT * FROM rules WHERE survey_id = :survey_id";
         $stmt = $db->prepare($query);
-        $result = $stmt->execute(['rule_name' => $rule_name, 'rule_type' => $rule_type]);
+        $stmt->execute(['survey_id' => $survey_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
+    public static function createRule($db, $survey_id, $rule_name, $rule_type) {
+        $query = "INSERT INTO rules (survey_id, rule_name, rule_type) VALUES (:survey_id, :rule_name, :rule_type)";
+        $stmt = $db->prepare($query);
+        $result = $stmt->execute([
+            'survey_id' => $survey_id,
+            'rule_name' => $rule_name,
+            'rule_type' => $rule_type
+        ]);
     
         if ($result) {
             return $db->lastInsertId();
@@ -18,6 +31,7 @@ class Rule {
         
         return false;
     }
+    
 
     public static function deleteRule($db, $rule_id) {
         $query = "DELETE FROM rules WHERE id = :id";
