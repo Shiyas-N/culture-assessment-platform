@@ -4,7 +4,6 @@ class QuestionSurvey{
 
     public static function getSurveyQuestion($db, $survey_id) {
         $query = 'SELECT q.id, q.text FROM questions q JOIN survey_questions sq ON q.id = sq.question_id WHERE sq.survey_id = :id';
-
         $stmt = $db->prepare($query);
         $stmt->execute(['id'=>$survey_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

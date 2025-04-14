@@ -5,18 +5,28 @@ function getSurveyIdFromURL() {
 
 const surveyId = getSurveyIdFromURL();
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   const conditionsContainer = document.getElementById("conditionsContainer");
   const addConditionBtn = document.getElementById("addConditionBtn");
 
-  const questions = [
-    { id: 1, text: "Do you like coding?" },
-    { id: 2, text: "Are you a morning person?" },
-  ];
-  const answers = [
-    { id: 1, text: "Yes" },
-    { id: 2, text: "No" },
-  ];
+  let questions = [];
+  let answers = [];
+
+  async function fetchQuestions() {
+    const res = await fetch(
+      `../../api/question_survey_api.php?survey_id=${surveyId}`
+    );
+    const data = await res.json();
+    questions = Array.isArray(data) ? data : [];
+  }
+
+  async function fetchAnswers() {
+    const res = await fetch("../../api/answer_option_api.php");
+    const data = await res.json();
+    answers = Array.isArray(data) ? data : [];
+  }
+
+  await Promise.all([fetchQuestions(), fetchAnswers()]);
 
   function createConditionRow() {
     const div = document.createElement("div");
@@ -36,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     answers.forEach((a) => {
       const opt = document.createElement("option");
       opt.value = a.id;
-      opt.textContent = a.text;
+      opt.textContent = a.answer_text;
       answerSelect.appendChild(opt);
     });
 
@@ -68,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
       deleteBtn
     );
     conditionsContainer.appendChild(div);
-
     return div;
   }
 

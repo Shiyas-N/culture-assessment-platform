@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     const params = new URLSearchParams(window.location.search);
-    const surveyId = params.get("id");
+    const surveyId = params.get("survey_id");
 
     console.log(surveyId);
     const entries = Array.from(selectedQuestions.entries());
