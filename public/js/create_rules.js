@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   );
                 } else {
                   alert("Rule Created Successfully");
-                  window.location.href = `survey_rules.php?survey_id=${surveyId}`;
+                  window.location.href = `cultural_value.php?survey_id=${surveyId}&rule_id=${ruleId}`;
                 }
               })
               .catch((err) => {
