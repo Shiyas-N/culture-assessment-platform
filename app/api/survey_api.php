@@ -80,19 +80,19 @@ switch ($method) {
         }
         break;
 
-    case 'PATCH':
-        parse_str(file_get_contents('php://input'), $input);
-
-        if (isset($input['id'])) {
-            $toggled = $surveyController->toggleSurveyStatus($input['id']);
-            echo json_encode([
-                'success' => $toggled > 0,
-                'message' => $toggled > 0 ? 'Survey status toggled successfully' : 'No change made'
-            ]);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'Missing survey id for toggle']);
-        }
-        break;
+        case 'PATCH':
+            $input = json_decode(file_get_contents('php://input'), true);
+        
+            if (isset($input['id'])) {
+                $toggled = $surveyController->toggleSurveyStatus($input['id']);
+                echo json_encode([
+                    'success' => $toggled > 0,
+                    'message' => $toggled > 0 ? 'Survey status toggled successfully' : 'No change made'
+                ]);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Missing survey id for toggle']);
+            }
+            break;
 
     default:
         echo json_encode(['error' => 'Invalid request method']);

@@ -30,12 +30,8 @@ $surveys = Survey::getAllSurveys($pdo);
         <tbody>
             <?php foreach ($surveys as $survey) : ?>
                 <tr>
-                    <td>
-                        <a href="survey_details.php?id=<?= $survey['id'] ?>" class="survey-link">
-                            <?= $survey['id'] ?>
-                        </a>
-                    </td>
-                    <td><?= $survey['title'] ?></td>
+                    <td><?= $survey['id'] ?></td>
+                    <td> <a href="survey_details.php?id=<?= $survey['id'] ?>" class="survey-link"> <?= $survey['title'] ?>  </a></td>
                     <td><?= $survey['description'] ?></td>
                     <td><?= $survey['issue'] ?></td>
                     <td><?= $survey['deadline'] ?></td>
@@ -48,7 +44,8 @@ $surveys = Survey::getAllSurveys($pdo);
         $buttonClass = $isLive ? 'unpublish' : 'publish';
         ?>
         <button
-            class="publish-btn <?= $buttonClass ?>"
+        id="publish"
+            class="publish-btn publish<?= $buttonClass ?>"
             data-id="<?= $survey['id'] ?>"
             data-status="<?= $isLive ?>">
             <?= $buttonText ?>
@@ -66,4 +63,4 @@ $surveys = Survey::getAllSurveys($pdo);
     </table>
 </div>
 
-<script src="../../../public/js/toggle_publish.js"></script>
+<script src="../../../public/js/admin_dashboard.js"></script>
