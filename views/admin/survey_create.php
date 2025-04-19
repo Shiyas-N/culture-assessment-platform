@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create survey</title>
-    <link rel="stylesheet" href="../../../public/css/survey_create.css">
+    <link rel="stylesheet" href="../../public/css/survey_create.css">
     
 </head>
 
@@ -57,7 +57,7 @@
 
 
 
-<script src="../../../public/js/survey.js"></script>
+<script src="../../public/js/survey.js"></script>
 
 <?php include '../partials/footer.php'; ?>
 

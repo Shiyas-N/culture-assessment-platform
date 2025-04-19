@@ -1,7 +1,7 @@
 <?php
 $surveyId = $_GET['survey_id'] ?? null;
 
-require_once __DIR__ . '/../../../db/connect.php';
+require_once __DIR__ . '/../../db/connect.php';
 require_once __DIR__ . '/../../controllers/QuestionController.php';
 
 $questionController = new QuestionController($pdo);
@@ -13,7 +13,7 @@ $questions = $questionController->getAllQuestions();
 <head>
   <meta charset="UTF-8">
   <title>Add Questions to Survey</title>
-  <link rel="stylesheet" href="../../../public/css/survey_rules.css">
+  <link rel="stylesheet" href="../../public/css/survey_rules.css">
 </head>
 <body>
   <div class="container">
@@ -53,6 +53,6 @@ $questions = $questionController->getAllQuestions();
     </form>
   </div>
 
-  <script src="../../../public/js/survey_question_handler.js"></script>
+  <script src="../../public/js/survey_question_handler.js"></script>
 </body>
 </html>

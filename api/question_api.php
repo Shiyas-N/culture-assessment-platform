@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../db/connect.php';
+require_once __DIR__ . '/../db/connect.php';
 require_once '../controllers/QuestionController.php';
 
 header('Content-Type: application/json');

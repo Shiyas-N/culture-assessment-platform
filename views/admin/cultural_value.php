@@ -7,7 +7,7 @@ $surveyId = $_GET['survey_id'] ?? null;
 <head>
   <meta charset="UTF-8">
   <title>Add Cultural Values to Rule</title>
-  <link rel="stylesheet" href="../../../public/css/cultural_value.css">
+  <link rel="stylesheet" href="../../public/css/cultural_value.css">
 </head>
 <body>
   <h2>Add Cultural Values to Rule (Rule ID: <?= $ruleId ?>)</h2>
@@ -27,6 +27,6 @@ $surveyId = $_GET['survey_id'] ?? null;
     const RULE_ID = <?= json_encode($ruleId) ?>;
     const SURVEY_ID = <?= json_encode($surveyId) ?>;
   </script>
-  <script src="../../../public/js/assign_cultural_value.js"></script>
+  <script src="../../public/js/assign_cultural_value.js"></script>
 </body>
 </html>

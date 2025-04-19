@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Create Rule</title>
-  <link rel="stylesheet" href="../../../public/css/survey_rules.css" />
+  <link rel="stylesheet" href="../../public/css/survey_rules.css" />
  
 </head>
 <body>
@@ -36,6 +36,6 @@
     </form>
   </div>
 
-  <script src="../../../public/js/create_rules.js"></script>
+  <script src="../../public/js/create_rules.js"></script>
 </body>
 </html>

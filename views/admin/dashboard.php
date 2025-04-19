@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../models/Survey.php';
-require_once __DIR__ . '/../../../db/connect.php';
+require_once __DIR__ . '/../../db/connect.php';
 $surveys = Survey::getAllSurveys($pdo); 
 ?>
 
@@ -63,4 +63,4 @@ $surveys = Survey::getAllSurveys($pdo);
     </table>
 </div>
 
-<script src="../../../public/js/admin_dashboard.js"></script>
+<script src="../../public/js/admin_dashboard.js"></script>

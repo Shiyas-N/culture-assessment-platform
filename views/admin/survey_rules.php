@@ -2,7 +2,7 @@
 
 $survey_id = $_GET['survey_id'] ?? null;
 
-require_once __DIR__ . '/../../../db/connect.php';
+require_once __DIR__ . '/../../db/connect.php';
 require_once __DIR__ . '/../../controllers/RuleController.php';
 
 
@@ -20,7 +20,7 @@ if ($survey_id) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rules List</title>
-    <link rel="stylesheet" href="../../../public/css/survey_rules.css">
+    <link rel="stylesheet" href="../../public/css/survey_rules.css">
 </head>
 <body>
     <div class="container">
@@ -55,5 +55,5 @@ if ($survey_id) {
 
 
 
-<script src="../../../public/js/survey_rules.js"></script>
+<script src="../../public/js/survey_rules.js"></script>
 
